@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# PROVIDE: proxysql
+# REQUIRE: networking syslog
+# KEYWORD: 
+
+# Author Abdelilah BENAOU 
+# mail	 : benaou.pro@hotmail.com
+ 
+. /etc/rc.subr
+ 
+name="proxysql"
+rcvar="proxysql_enable"
+command="/usr/local/bin/proxysql"
+ 
+proxysql_user="root"
+proxysql_config="/usr/local/etc/proxysql.cnf"
+ 
+start_cmd="/usr/sbin/daemon -f -u $proxysql_user $command -c $proxysql_config"
+ 
+load_rc_config $name
+: ${proxysql_enable:=no}
+ 
+run_rc_command "$1"
